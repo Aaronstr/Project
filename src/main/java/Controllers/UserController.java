@@ -14,7 +14,7 @@ public class UserController {
     //User create
 
     @POST
-    @Path("/User/Create")
+    @Path("User/Create")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String insertUSER
@@ -40,7 +40,7 @@ public class UserController {
 
     //Update Password
     @POST
-    @Path("/User/Update")
+    @Path("User/Update")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String updatePassword(@FormDataParam("Password") String Password, @FormDataParam("Username") String Username){ //update username in user
@@ -66,7 +66,7 @@ public class UserController {
 
     // select user
     @GET
-    @Path("/User/get/{Username}")
+    @Path("get/{Username}")
     @Produces(MediaType.APPLICATION_JSON)
     public String SelectUser(@PathParam("Username") String Username) throws Exception {//It will calls for these parameters
         if (Username == null) {
@@ -95,7 +95,7 @@ public class UserController {
 
     //Delete User
     @POST
-    @Path("/User/Delete")
+    @Path("User/Delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteUser(@FormDataParam("Username") String Username){//delete player method
