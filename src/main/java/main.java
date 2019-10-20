@@ -9,7 +9,8 @@ public class main {
 
     public static void main(String[] args) {
         openDatabase("Project Database.db");
-        AnswerType2Controller.deleteUser2(2);
+
+
 
 
         // code using the database goes here!
@@ -38,9 +39,8 @@ public class main {
         } catch (Exception exception) {
             System.out.println("Database disconnection error: " + exception.getMessage());
         }
-
-
     }
+
 
 
 }

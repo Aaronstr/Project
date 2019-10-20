@@ -52,10 +52,6 @@ public class UserController {
                 System.out.print("password: " + Password +" , ");
                 System.out.print("Token: " + Token +" , ");
             }
-
-
-
-
             ps.execute();//executes the prepared statements
         }catch (Exception exception){ //if the parameters don't work or an database error
             System.out.println("Database Error:"+exception.getMessage());
@@ -68,7 +64,7 @@ public class UserController {
             ps.execute();//executes
 
         }catch (Exception exception){
-            System.out.println("Database Error:");//if there is no Username with that value
+            System.out.println("Database Error:");
         }
     }
 
