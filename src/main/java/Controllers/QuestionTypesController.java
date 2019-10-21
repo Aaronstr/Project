@@ -1,6 +1,6 @@
 package Controllers;
 
-import Server.main;
+import Server.Main;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ public class QuestionTypesController {
     //select questionType
     public static void SelectQuestionType( int QuestionTypeID){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("SELECT QuestionType From QUESTIONTYPE  Where QuestionTypeID=?");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT QuestionType From QUESTIONTYPE  Where QuestionTypeID=?");
             ps.setInt(1,QuestionTypeID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {

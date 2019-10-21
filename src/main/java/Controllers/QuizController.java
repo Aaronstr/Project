@@ -1,6 +1,6 @@
 package Controllers;
 
-import Server.main;
+import Server.Main;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ public class QuizController {
     // create quiz
     public static void insertQuiz(String Username, String QuizName){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("INSERT INTO  QUIZ(UserName, QuizName) VALUES  (?,?)");//sql code to insert values into the fields
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO  QUIZ(UserName, QuizName) VALUES  (?,?)");//sql code to insert values into the fields
             ps.setString(1,Username);
             ps.setString(2,QuizName);
 
@@ -19,7 +19,7 @@ public class QuizController {
     }
     public static void updateQuiz(String QuizName, int QuizID){ //update username in user
         try{
-            PreparedStatement ps = main.db.prepareStatement("UPDATE Quiz Set QuizName = ? Where QuizID=?");//update SQL query
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE Quiz Set QuizName = ? Where QuizID=?");//update SQL query
             ps.setString(1,QuizName);
             ps.setInt(2,QuizID);
 
@@ -32,7 +32,7 @@ public class QuizController {
   //Quiz Select with quizName
   public static void SelectQuiz1( String QuizName) {//It will calls for these parameters
       try {
-          PreparedStatement ps = main.db.prepareStatement("Select QuizID, Username From QUIZ Where QuizName = ?  ");
+          PreparedStatement ps = Main.db.prepareStatement("Select QuizID, Username From QUIZ Where QuizName = ?  ");
           ps.setString(1, QuizName);
           ResultSet results = ps.executeQuery();
           while (results.next()) {
@@ -51,7 +51,7 @@ public class QuizController {
   //SelectWithUsername
     public static void SelectQuiz2( String Username){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("Select  QuizID, QuizName From QUIZ Where Username = ?  ");
+            PreparedStatement ps = Main.db.prepareStatement("Select  QuizID, QuizName From QUIZ Where Username = ?  ");
             ps.setString(1,Username);
            ResultSet results = ps.executeQuery();
            while (results.next()) {
@@ -72,7 +72,7 @@ public class QuizController {
     //Select with QuizID
     public static void SelectQuiz3( int QuizID){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("Select  Username, QuizName From QUIZ Where QuizID = ?  ");
+            PreparedStatement ps = Main.db.prepareStatement("Select  Username, QuizName From QUIZ Where QuizID = ?  ");
             ps.setInt(1,QuizID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -93,7 +93,7 @@ public class QuizController {
     //Select all quizzes
     public static void SelectQuiz4(){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("Select  Username, QuizName,QuizID From QUIZ   ");
+            PreparedStatement ps = Main.db.prepareStatement("Select  Username, QuizName,QuizID From QUIZ   ");
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 String Username = results.getString(1);
@@ -115,7 +115,7 @@ public class QuizController {
     //Deete a quiz from its quizID
     public static void deleteQuiz(int QuizID){//delete  method
         try{
-            PreparedStatement ps = main.db.prepareStatement("DELETE FROM Quiz WHERE QuizID=?");
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Quiz WHERE QuizID=?");
             ps.setInt(1,QuizID);//TheUserId to remove
             ps.execute();//executes
 

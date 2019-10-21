@@ -1,6 +1,6 @@
 package Controllers;
 
-import Server.main;
+import Server.Main;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ public class FlashCardSideTwoController {
     //Create FlashCardSideTwo
     public static void insertFlashCardSideTwo(int FlashCardSetID, String Text){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("INSERT INTO  FlashCardSIDETwo( FlashCardSetID, Text)  VALUES (?,?)");//sql code to insert values into the fields
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO  FlashCardSIDETwo( FlashCardSetID, Text)  VALUES (?,?)");//sql code to insert values into the fields
             ps.setInt(1,FlashCardSetID);
             ps.setString(2,Text);
 
@@ -21,7 +21,7 @@ public class FlashCardSideTwoController {
     public static void updateSideTwo(int SideTwoID,String Text){
 
         try{
-            PreparedStatement ps = main.db.prepareStatement("UPDATE FlashCardSIDETwo Set Text= ? Where SideTwoID=?");
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE FlashCardSIDETwo Set Text= ? Where SideTwoID=?");
             ps.setString(1,Text);
             ps.setInt(2,SideTwoID);
             ps.execute();//executes the prepared statements
@@ -33,7 +33,7 @@ public class FlashCardSideTwoController {
     //Select using FlashCardSetID
     public static void SelectFlashCardSideTwo1( int FlashCardSetID){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("SELECT SideTwoID, Text From FlashCardSIDETwo Where FlashCardSetID=? ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT SideTwoID, Text From FlashCardSIDETwo Where FlashCardSetID=? ");
             ps.setInt(1,FlashCardSetID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -50,7 +50,7 @@ public class FlashCardSideTwoController {
     //Select using SideTwoID
     public static void SelectFlashCardSideTwo2( int SideTwoID){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("SELECT FlashCardSetID, Text From FlashCardSIDETwo Where SideTwoID=? ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT FlashCardSetID, Text From FlashCardSIDETwo Where SideTwoID=? ");
             ps.setInt(1,SideTwoID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -67,7 +67,7 @@ public class FlashCardSideTwoController {
     //Delete FlashCardSideTwo with  flashCardSetID
     public static void deleteFlashSideOne1(int FlashCardSetID){
         try{
-            PreparedStatement ps = main.db.prepareStatement("DELETE from FlashCardSIDETwo Where FlashCardSetID=?");
+            PreparedStatement ps = Main.db.prepareStatement("DELETE from FlashCardSIDETwo Where FlashCardSetID=?");
             ps.setInt(1,FlashCardSetID);
             ps.execute();//executes
 
@@ -77,7 +77,7 @@ public class FlashCardSideTwoController {
     }
     public static void deleteFlashSideTwo2(int SideTwoID){//delete player method
         try{
-            PreparedStatement ps = main.db.prepareStatement("DELETE from FlashCardSIDETwo Where SideTwoID=?");
+            PreparedStatement ps = Main.db.prepareStatement("DELETE from FlashCardSIDETwo Where SideTwoID=?");
             ps.setInt(1,SideTwoID);
             ps.execute();//executes
 

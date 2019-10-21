@@ -9,12 +9,12 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import org.sqlite.SQLiteConfig;
 import java.sql.*;
 
-public class main {
+public class Main {
     public static Connection db = null;
 
     public static void main(String[] args) {
 
-        openDatabase("Database.db");
+        openDatabase("Project Database.db");
 
         ResourceConfig config = new ResourceConfig();
         config.packages("Controllers");
@@ -23,7 +23,7 @@ public class main {
 
         Server server = new Server(8081);
         ServletContextHandler context = new ServletContextHandler(server, "/");
-        context.addServlet(servlet, "/");
+        context.addServlet(servlet, "/*");
 
         try {
             server.start();

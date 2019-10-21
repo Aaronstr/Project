@@ -1,5 +1,5 @@
 package Controllers;
-import Server.main;
+import Server.Main;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.json.simple.JSONObject;
 
@@ -8,13 +8,13 @@ import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
+@Path("User/")
 public class UserController {
 
     //User create
 
     @POST
-    @Path("User/Create")
+    @Path("Create")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String insertUSER
@@ -25,7 +25,7 @@ public class UserController {
             }
             System.out.println("thing/new Username=" + Username);// Ask Steve
 
-            PreparedStatement ps = main.db.prepareStatement(
+            PreparedStatement ps = Main.db.prepareStatement(
                     "INSERT INTO  USER(UserName, Password) VALUES (?,?)");
             ps.setString(1,Username);
             ps.setString(2,Password);
@@ -40,7 +40,7 @@ public class UserController {
 
     //Update Password
     @POST
-    @Path("User/Update")
+    @Path("Update")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String updatePassword(@FormDataParam("Password") String Password, @FormDataParam("Username") String Username){ //update username in user
@@ -49,7 +49,7 @@ public class UserController {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("thing/update Username=" + Username);
-            PreparedStatement ps = main.db.prepareStatement("UPDATE USER Set Password = ? Where Username=?");//update SQL query
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE USER Set Password = ? Where Username=?");//update SQL query
             ps.setString(1,Password);//prepared statement updates Username to what is requested
             ps.setString(2,Username);
             ps.execute();//executes the prepared statements
@@ -66,18 +66,21 @@ public class UserController {
 
     // select user
     @GET
-    @Path("get/{Username}")
+    @Path("Get/{Username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String SelectUser(@PathParam("Username") String Username) throws Exception {//It will calls for these parameters
+    public String SelectUser(@PathParam("Username") String Username) {//It will calls for these parameters
+
+        try{
+
         if (Username == null) {
             throw new Exception("Thing's 'id' is missing in the HTTP request's URL.");
         }
         System.out.println("User/get/" + Username);
-        try{
+
 
 
             JSONObject item = new JSONObject();
-            PreparedStatement ps = main.db.prepareStatement("Select  Password, Token From USER Where Username = ?  ");
+            PreparedStatement ps = Main.db.prepareStatement("Select  Password, Token From USER Where Username = ?  ");
             ps.setString(1,Username);
             ResultSet results = ps.executeQuery();
             if (results.next()) {
@@ -95,7 +98,7 @@ public class UserController {
 
     //Delete User
     @POST
-    @Path("User/Delete")
+    @Path("Delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteUser(@FormDataParam("Username") String Username){//delete player method
@@ -104,7 +107,7 @@ public class UserController {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("thing/delete Username=" + Username);
-            PreparedStatement ps = main.db.prepareStatement("DELETE FROM USER WHERE Username =?");//SQL Statement saying to delete everything with the Username
+            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM USER WHERE Username =?");//SQL Statement saying to delete everything with the Username
             ps.setString(1,Username);//TheUserId to remove
             ps.execute();//executes
             return "{\"status\": \"OK\"}";

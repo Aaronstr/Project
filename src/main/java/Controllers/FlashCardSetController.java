@@ -1,6 +1,6 @@
 package Controllers;
 
-import Server.main;
+import Server.Main;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ public class FlashCardSetController {
     //Create FlashCardSet
     public static void insertFlashCardSets(String Username, String FlashCardSetName){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("INSERT INTO  FlashcardSets ( Username, FlashCardSetName) VALUES (?,?)");//sql code to insert values into the fields
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO  FlashcardSets ( Username, FlashCardSetName) VALUES (?,?)");//sql code to insert values into the fields
             ps.setString(1,Username);
             ps.setString(2,FlashCardSetName);
 
@@ -21,7 +21,7 @@ public class FlashCardSetController {
     public static void updateName1(int FlashCardSetID,String FlashCardSetName){ //update username in user
 
         try{
-            PreparedStatement ps = main.db.prepareStatement("UPDATE FlashCardSets SET FlashCardSetName= ? Where FlashCardSetID=?");//update SQL queryps.setInt(1,FlashCardSetID);
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE FlashCardSets SET FlashCardSetName= ? Where FlashCardSetID=?");//update SQL queryps.setInt(1,FlashCardSetID);
             ps.setString(1,FlashCardSetName);
             ps.setInt(2,FlashCardSetID);
             ps.execute();//executes the prepared statements
@@ -34,7 +34,7 @@ public class FlashCardSetController {
     public static void updateName2(String OldFlashCardSetName,String FlashCardSetName){ //update username in user
 
         try{
-            PreparedStatement ps = main.db.prepareStatement("UPDATE FlashCardSets SET FlashCardSetName= ? Where FlashCardSetName=?");//update SQL queryps.setInt(1,FlashCardSetID);
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE FlashCardSets SET FlashCardSetName= ? Where FlashCardSetName=?");//update SQL queryps.setInt(1,FlashCardSetID);
             ps.setString(1,FlashCardSetName);
             ps.setString(2,OldFlashCardSetName);
             ps.execute();//executes the prepared statements
@@ -46,7 +46,7 @@ public class FlashCardSetController {
     //Select using ID
     public static void SelectFlashCardSet1( int FlashCardSetID){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("SELECT Username, FlashCardSetName From FLASHCARDSETS Where FlashCardSetID=?  ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT Username, FlashCardSetName From FLASHCARDSETS Where FlashCardSetID=?  ");
             ps.setInt(1,FlashCardSetID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -63,7 +63,7 @@ public class FlashCardSetController {
     //Select using Name
     public static void SelectFlashCardSet2( String FlashCardSetName){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("SELECT FlashCardSetID, Username From FLASHCARDSETs Where FlashCardSetName = ? ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT FlashCardSetID, Username From FLASHCARDSETs Where FlashCardSetName = ? ");
             ps.setString(1,FlashCardSetName);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -80,7 +80,7 @@ public class FlashCardSetController {
     //Select using UserName
     public static void SelectFlashCardSet3( String Username){//It will calls for these parameters
         try{
-            PreparedStatement ps = main.db.prepareStatement("SELECT FlashCardSetID, FlashCardSetName From FLASHCARDSETS Where Username=? ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT FlashCardSetID, FlashCardSetName From FLASHCARDSETS Where Username=? ");
             ps.setString(1,Username);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -97,7 +97,7 @@ public class FlashCardSetController {
     //Delete Flashcardset
     public static void deleteFlashCardSet(int FlashCardSetID){//delete player method
         try{
-            PreparedStatement ps = main.db.prepareStatement("DELETE from FLASHCARDSETs Where FlashCardSetID=?");
+            PreparedStatement ps = Main.db.prepareStatement("DELETE from FLASHCARDSETs Where FlashCardSetID=?");
             ps.setInt(1,FlashCardSetID);
             ps.execute();//executes
 

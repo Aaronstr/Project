@@ -1,6 +1,6 @@
 package Controllers;
 
-import Server.main;
+import Server.Main;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +8,7 @@ public class AnswerTypeOneController {
     //Answer creator for typing
     public static void insertAnswer1(int QuestionID, String CorrectAnswerText) {//It will calls for these parameters
         try {
-            PreparedStatement ps = main.db.prepareStatement("INSERT INTO ANSWERTYPEONE( QuestionID, CorrectAnswerText) VALUES (?,?)");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO ANSWERTYPEONE( QuestionID, CorrectAnswerText) VALUES (?,?)");
             ps.setInt(1, QuestionID);
             ps.setString(2, CorrectAnswerText);
 
@@ -21,7 +21,7 @@ public class AnswerTypeOneController {
     //update the answer
     public static void updateCorrectAnswerText(String CorrectAnswerText, int QuestionID) {
         try {
-            PreparedStatement ps = main.db.prepareStatement("UPDATE ANSWERTYPEONE Set  CorrectAnswerText = ? Where QuestionID=?");//update SQL query
+            PreparedStatement ps = Main.db.prepareStatement("UPDATE ANSWERTYPEONE Set  CorrectAnswerText = ? Where QuestionID=?");//update SQL query
             ps.setString(1, CorrectAnswerText);
             ps.setInt(2, QuestionID);
 
@@ -35,7 +35,7 @@ public class AnswerTypeOneController {
     // select the answer
     public static void SelectAnswer1(int QuestionID) {//It will calls for these parameters
         try {
-            PreparedStatement ps = main.db.prepareStatement("SELECT AnswerID, CorrectAnswerText From ANSWERTYPEONE Where QuestionID=?  ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT AnswerID, CorrectAnswerText From ANSWERTYPEONE Where QuestionID=?  ");
             ps.setInt(1, QuestionID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -55,7 +55,7 @@ public class AnswerTypeOneController {
     //Delete answer using answerID
     public static void deleteAnswer1(int AnswerID) {
         try {
-            PreparedStatement ps = main.db.prepareStatement("DELETE from ANSWERTYPEONE Where AnswerID=?");//SQL Statement saying to delete everything
+            PreparedStatement ps = Main.db.prepareStatement("DELETE from ANSWERTYPEONE Where AnswerID=?");//SQL Statement saying to delete everything
             ps.setInt(1, AnswerID);
             ps.execute();//executes
 
@@ -66,7 +66,7 @@ public class AnswerTypeOneController {
     //Delete answer using QuestionID
     public static void deleteAnswer2(int QuestionID) {
         try {
-            PreparedStatement ps = main.db.prepareStatement("DELETE from ANSWERTYPEONE Where QuestionID=?");//SQL Statement saying to delete everything
+            PreparedStatement ps = Main.db.prepareStatement("DELETE from ANSWERTYPEONE Where QuestionID=?");//SQL Statement saying to delete everything
             ps.setInt(1, QuestionID);
             ps.execute();//executes
 
