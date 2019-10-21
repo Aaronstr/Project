@@ -112,8 +112,8 @@ public class QuizController {
             System.out.println("Database Error:"+exception.getMessage());
         }
     }
-    //Deete a quiz from its quizID
-    public static void deleteQuiz(int QuizID){//delete  method
+    //Delete a quiz from its quizID
+    public static void deleteQuiz1(int QuizID){//delete  method
         try{
             PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Quiz WHERE QuizID=?");
             ps.setInt(1,QuizID);//TheUserId to remove
@@ -123,4 +123,11 @@ public class QuizController {
             System.out.println("Database Error:");
         }
     }
+
+
+
+
+
+
 }
+
