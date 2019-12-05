@@ -14,4 +14,19 @@ function pageLoad() {
 
 }
 
+function checkLogin() {
+
+    let Username = Cookies.get("Username");
+    let logInHTML = '';
+    if (Username === undefined) {
+        logInHTML = "Not logged in. <a href='/client/login.html'>Log in</a>";
+    } else {
+        logInHTML = "Logged in as " + username + ". <a href='/client/login.html?logout'>Log out</a>";
+    }
+    document.getElementById("loggedInDetails").innerHTML = logInHTML;
+}
+
+
+
+
 

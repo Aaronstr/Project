@@ -1,5 +1,5 @@
 body {
-    background-color: navy;
+    background-color: #ff5e00;
     margin: 0;
     font-family: 'Arial', serif;
 }
@@ -9,9 +9,35 @@ h1 {
 }
 
 #content {
-    background-color: white;
+    background-color: #ffae3f;
     width: 1000px;
     margin: 0 auto;
     min-height: 600px;
     padding: 32px;
 }
+.loginDiv {
+    font-size: 14pt;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+#username, #password {
+    margin-left: 20px;
+    font-size: 14pt;
+}
+
+#loginButton {
+    width: 200px;
+    background-color: cornflowerblue;
+}
+
+#loginButton:hover {
+    background-color: dodgerblue;
+}
+#loggedInDetails {
+    margin: 0;
+    text-align: right;
+    display: inline;
+    float: right
+}
+
