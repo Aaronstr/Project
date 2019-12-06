@@ -40,4 +40,12 @@ h1 {
     display: inline;
     float: right
 }
+ #loginButton {
+     color: black;
+     font-size: 14px;
+     border: none;
+     padding: 8px;
+     border-radius: 8px;
+ }
+
 

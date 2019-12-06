@@ -15,15 +15,15 @@ function login(event) {
     const form = document.getElementById("loginForm");//loads the form to login
     const formData = new FormData(form);
 
-    fetch("/user/login", {method: 'post', body: formData}//calls API login in the user controller
+    fetch("/User/login", {method: 'post', body: formData}//calls API login in the user controller
     ).then(response => response.json()
     ).then(responseData => {
 
         if (responseData.hasOwnProperty('error')) {
             alert(responseData.error);
         } else {
-            Cookies.set("username", responseData.username);
-            Cookies.set("token", responseData.token);
+            Cookies.set("Username", responseData.username);
+            Cookies.set("Token", responseData.Token);
 
             window.location.href = '/client/index.html';
         }
@@ -31,7 +31,7 @@ function login(event) {
 }
 function logout() {
 
-    fetch("/user/logout", {method: 'post'}//calls API logout in the user controller
+    fetch("/User/logout", {method: 'post'}//calls API logout in the user controller
     ).then(response => response.json()
     ).then(responseData => {
         if (responseData.hasOwnProperty('error')) {
@@ -40,8 +40,8 @@ function logout() {
 
         } else {
 
-            Cookies.remove("username");
-            Cookies.remove("token");
+            Cookies.remove("Username");
+            Cookies.remove("Token");
 
             window.location.href = '/client/index.html';
 

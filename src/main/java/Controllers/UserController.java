@@ -20,7 +20,7 @@ public class UserController {
 
         try {
 
-            PreparedStatement ps1 = Main.db.prepareStatement("SELECT Password FROM Users WHERE Username = ?");
+            PreparedStatement ps1 = Main.db.prepareStatement("SELECT Password FROM User WHERE Username = ?");
             ps1.setString(1, Username);
             ResultSet loginResults = ps1.executeQuery();
             if (loginResults.next()) {
@@ -31,7 +31,7 @@ public class UserController {
 
                     String Token = UUID.randomUUID().toString();
 
-                    PreparedStatement ps2 = Main.db.prepareStatement("UPDATE Users SET Token = ? WHERE Username = ?");
+                    PreparedStatement ps2 = Main.db.prepareStatement("UPDATE User SET Token = ? WHERE Username = ?");
                     ps2.setString(1, Token);
                     ps2.setString(2, Username);
                     ps2.executeUpdate();
