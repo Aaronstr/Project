@@ -40,6 +40,18 @@ h1 {
     display: inline;
     float: right
 }
+ #searchButton, #createQuizButton, #createFlashcardButton {
+     background-color: #af5f09;
+     border: none;
+
+     padding: 20px 36px;
+     border-radius: 16px;
+     text-align: center;
+     display: inline;
+     font-size: 32px;
+
+
+}
  #loginButton {
      color: black;
      font-size: 14px;
@@ -48,4 +60,19 @@ h1 {
      border-radius: 8px;
  }
 
+.scrollable {
+    height: 200px;
+    overflow-y: scroll;
+}
 
+.centreText {
+    text-align: center;
+}
+
+.pushMeDown {
+    padding-top: 90px;
+    padding-bottom: 20px;
+}
+.padding {
+    padding: 20px;
+}
