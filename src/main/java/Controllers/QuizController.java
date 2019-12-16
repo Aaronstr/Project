@@ -172,7 +172,7 @@ public class QuizController {
             ResultSet results = ps.executeQuery();//executes the prepared statements
             while (results.next()) {
                 JSONObject item = new JSONObject();
-                item.put("Username", results.getInt(1));
+                item.put("Username", results.getString(1));
                 item.put("QuizName", results.getString(2));
                 item.put("QuizID", results.getInt(3));
                 list.add(item);

@@ -1,15 +1,28 @@
 function pageLoad() {
 
-    let resultsDiv = document.getElementById("searchResults");
 
-    let resultsHTML = '';
+    fetch("/Quiz/Select", {method: 'get'}//calls API login in the quiz controller
+    ).then(response => response.json()
+    ).then(quizzes => {
+        if (quizzes.hasOwnProperty('error')) {
+            alert(quizzes.error);
+        } else {
+            let resultsDiv = document.getElementById("searchResults");
+            let resultsHTML = "";
 
-    for (let i = 0; i < 100; i++) {
+            for (let quiz of quizzes) {
+                resultsHTML += `<div> <a href="/client/quiz.html?id=${quiz.QuizID}" style="color: black;"> QUIZID: ${quiz.QuizID} --- QUIZNAME: ${quiz.QuizName} --- USERNAME: ${quiz.Username}</a></div>`;
+            }
+            resultsDiv.innerHTML = resultsHTML;
 
-        resultsHTML += `<div><a href="https://www.bbc.co.uk">test x${i}</a></div>`;
 
-    }
-
-    resultsDiv.innerHTML = resultsHTML;
-
+        }
+    });
+//" style="text-decoration: none;"
 }
+
+
+
+
+
+
