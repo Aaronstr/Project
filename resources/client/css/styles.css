@@ -60,7 +60,13 @@ h1 {
      border-radius: 8px;
  }
 
-.scrollable {
+.scrollablequiz {
+    height: 200px;
+    overflow-y: auto;
+
+
+}
+.scrollableflashcard {
     height: 200px;
     overflow-y: auto;
 
