@@ -11,7 +11,7 @@ function pageLoad() {
             let resultsHTML = "";
 
             for (let quiz of quizzes) {
-                resultsHTML += `<div> <a href="/client/quiz.html?id=${quiz.QuizID}" style="color: black;"> QUIZID: ${quiz.QuizID} --- QUIZNAME: ${quiz.QuizName} --- USERNAME: ${quiz.Username}</a></div>`;
+                resultsHTML += `<div> <a href="/client/quiz.html?id=${quiz.QuizID}" style="color: black;text-decoration: none;"> QUIZID: ${quiz.QuizID} --- QUIZNAME: ${quiz.QuizName} --- USERNAME: ${quiz.Username}</a></div>`;
             }
             resultsDiv.innerHTML = resultsHTML;
 

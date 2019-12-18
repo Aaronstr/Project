@@ -62,7 +62,8 @@ h1 {
 
 .scrollable {
     height: 200px;
-    overflow-y: scroll;
+    overflow-y: auto;
+
 }
 
 .centreText {
