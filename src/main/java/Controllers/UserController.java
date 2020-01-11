@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.UUID;
-
+// This interacts with the user table
 @Path("User/")
 public class UserController {
     //user log in
