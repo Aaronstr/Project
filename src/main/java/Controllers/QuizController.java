@@ -26,7 +26,7 @@ public class QuizController {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             // checks if empty
-            System.out.println("thing/new Quiz=" + QuizName);
+            System.out.println("Quiz/new Quiz=" + QuizName);
             PreparedStatement ps = Main.db.prepareStatement("INSERT INTO  QUIZ(UserName, QuizName) VALUES  (?,?)");//sql code to insert values into the fields
             ps.setString(1,Username);
             ps.setString(2,QuizName);
@@ -42,7 +42,7 @@ public class QuizController {
     //update quizname using quizID
 
     @POST
-    @Path("update")
+    @Path("Update")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String updatePassword(@FormDataParam("QuizName") String QuizName, @FormDataParam("QuizID") Integer QuizID ){
@@ -190,7 +190,7 @@ public class QuizController {
 
 
     @POST
-    @Path("delete")
+    @Path("Delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteQuiz1(@FormDataParam("QuizID") Integer QuizID) { // id which is being deleted

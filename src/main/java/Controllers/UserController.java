@@ -168,7 +168,7 @@ public class UserController {
 
     // select user
     @GET
-    @Path("Get/{Username}")
+    @Path("Select/{Username}")
     @Produces(MediaType.APPLICATION_JSON)
     public String SelectUser(@PathParam("Username") String Username) {//It will calls for these parameters
 
@@ -203,14 +203,14 @@ public class UserController {
     @Path("Delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteUser(@FormDataParam("Username") String Username){//delete player method
+    public String deleteUser(@FormDataParam("Username") String Username){//delete User method
         try{
             if (Username == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("thing/delete Username=" + Username);
+            System.out.println("User/delete Username=" + Username);
             PreparedStatement ps = Main.db.prepareStatement("DELETE FROM USER WHERE Username =?");//SQL Statement saying to delete everything with the Username
-            ps.setString(1,Username);//TheUserId to remove
+            ps.setString(1,Username);//TheUser to remove
             ps.execute();//executes
             return "{\"status\": \"OK\"}";
         }catch (Exception exception){
