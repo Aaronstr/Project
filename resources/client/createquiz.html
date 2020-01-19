@@ -5,7 +5,7 @@
     <title>Create Quiz</title>
     <link rel="stylesheet" type="text/css" href="/client/css/styles.css">
     <script src="/client/js/js.cookie.js"></script>
-    <script src="/client/js/index.js"></script>
+    <script src="/client/js/Createquiz.js"></script>
 </head>
 <body onload="pageLoad()">
 <div id="content">
@@ -14,10 +14,29 @@
         <div id="loggedInDetails"><a href="/client/login.html">Login</a></div>
 
     </div>
+    <div id = "listQuiz"></div>
+    <div id ="editKR">
+        <h2 id = "editHeading"></h2>
+        <form id = "krForm">
+            <div>
+                <lavel for ="QuizID" class ="label">QuizID:</lavel>
+                <input type ="text" name="QuizID" id ="QuizID">
+            </div>
+            <div>
+                <label for ="QuizName" class ="QuizName">QuizName:</label>
+                <input type="text" name ="QuizName" id="QuizName">
+            </div>
+            <div>
+                <label for="Username" class ="label">Username :</label>
+                <input type="text" name ="Username" id = "Username">
+            </div>
 
-    <h1 >Create Quiz</h1>
-
-
+            <div>
+                <input type="submit" value="Save" id="saveButton">
+                <input type="submit" value="Cancel" id="cancelButton">
+            </div>
+        </form>
+    </div>
 
 
 

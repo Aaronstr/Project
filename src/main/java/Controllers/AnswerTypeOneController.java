@@ -15,7 +15,7 @@ public class AnswerTypeOneController {
     @Path("Create")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String  insertAnswer(
+    public String insertAnswer(
             @FormDataParam("QuestionID") Integer QuestionID, @FormDataParam("CorrectAnswerText") String CorrectAnswerText) { //It will calls for these parameters
         try {
             if (QuestionID == null || CorrectAnswerText == null) {
@@ -42,7 +42,7 @@ public class AnswerTypeOneController {
     public String updateCorrectAnswerText(
             @FormDataParam("CorrectAnswerText") String CorrectAnswerText, @FormDataParam("QuestionID") Integer QuestionID) {
         try {
-            if (CorrectAnswerText == null || QuestionID == null ) {
+            if (CorrectAnswerText == null || QuestionID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("thing/update id=" + QuestionID);
@@ -64,7 +64,7 @@ public class AnswerTypeOneController {
     @GET
     @Path("Select/{QuestionID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String SelectAnswer(@PathParam("QuestionID") Integer QuestionID)  {//It will calls for these parameters
+    public String SelectAnswer(@PathParam("QuestionID") Integer QuestionID) {//It will calls for these parameters
         try {
             if (QuestionID == null) {
                 throw new Exception("Thing's 'QuestionID' is missing in the HTTP request's URL.");
@@ -94,7 +94,7 @@ public class AnswerTypeOneController {
     @Path("Delete1")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteAnswer1(@FormDataParam("AnswerID") Integer  AnswerID) {
+    public String deleteAnswer1(@FormDataParam("AnswerID") Integer AnswerID) {
         try {
             if (AnswerID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
@@ -112,6 +112,7 @@ public class AnswerTypeOneController {
 
         }
     }
+
     //Delete answer using QuestionID
     @POST
     @Path("Delete2")
@@ -134,4 +135,6 @@ public class AnswerTypeOneController {
 
         }
     }
+
+
 }
