@@ -5,7 +5,8 @@ function  pageLoad() {
         '<th>QuizName</th>' +
         '<th>Username</th>' +
         '</tr>';
-    fetch('/Quiz/Select', {method: 'get'}
+
+    fetch('/Quiz/Select2/' + Cookies.get("Username"), {method: 'get'}
     ).then(response => response.json()
     ).then(Quizzes => {
         for (let Quiz of Quizzes) {
@@ -33,8 +34,8 @@ function  pageLoad() {
         }
 
     });
-    document.getElementById("saveButton").addEventListener("click", saveEditQuiz);
-    document.getElementById("cancelButton").addEventListener("click",cancelEditQuiz);
+   // document.getElementById("saveButton").addEventListener("click", saveEditQuiz);
+   // document.getElementById("cancelButton").addEventListener("click",cancelEditQuiz);
 }
 
 
@@ -62,44 +63,6 @@ function deleteQuiz(event){
         let QuizID = event.target.getAttribute("data-id");
         let formData = new FormData();
         formData.append("QuizID", QuizID);
-        fetch('/Question/Select', {method: 'get',body: formData}
-        ).then(response => response.json()
-        ).then(Questions => {
-            for (let Question of Questions) {
-                let x = Question.QuestionID;
-                const formData = new FormData(x);
-                fetch('/AnswerTypeTwo/Delete3', {method: 'post', body: formData}
-                ).then(response => response.json()
-                ).then(responseData => {
-                        if (responseData.hasOwnProperty('error')) {
-                            alert(responseData.error);
-                        } else {
-
-                        }
-                    }
-                )
-                fetch('/AnswerTypeOne/Delete3', {method: 'post', body: formData}
-                ).then(response => response.json()
-                ).then(responseData => {
-                        if (responseData.hasOwnProperty('error')) {
-                            alert(responseData.error);
-                        } else {
-
-                        }
-                    }
-                )
-            }
-        });
-        fetch('/Question/Delete1',{method: 'post',body:formData}
-        ).then(response => response.json()
-        ).then(responseData =>{
-                if(responseData.hasOwnProperty('error')){
-                    alert(responseData.error);
-                }else{
-
-                }
-            }
-        )
 
         fetch('/Quiz/Delete',{method: 'post',body:formData}
         ).then(response => response.json()
@@ -107,7 +70,7 @@ function deleteQuiz(event){
                 if(responseData.hasOwnProperty('error')){
                     alert(responseData.error);
                 }else{
-
+                    pageLoad();
                 }
             }
         )

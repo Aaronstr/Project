@@ -110,19 +110,22 @@ public class QuizController {
             }
             // checks if empty
             System.out.println("Quiz/Select2/" + Username);
-            JSONObject item = new JSONObject();
+            JSONArray list = new JSONArray();
             PreparedStatement ps = Main.db.prepareStatement("Select  QuizID, QuizName From QUIZ Where Username = ?  ");
             ps.setString(1,Username);
             ResultSet results = ps.executeQuery();
-            if (results.next()) {
+            while  (results.next()) {
+                JSONObject item = new JSONObject();
                 item.put("Username", Username);
                 item.put("QuizID", results.getInt(1));
                 item.put("QuizName", results.getString(2));
+                list.add(item);
             }
-            return item.toString();
+            return list.toString();
         }catch (Exception exception){ //if the parameters don't work or an database error
             System.out.println("Database error: " + exception.getMessage());
-            return "{\"error\": \"Unable to get item, please see server console for more info.\"}";
+            return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
+
         } //Database error message
     }
 

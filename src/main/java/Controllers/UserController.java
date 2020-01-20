@@ -36,7 +36,10 @@ public class UserController {
                     ps2.setString(2, Username);
                     ps2.executeUpdate();
 
-                    return "{\"token\": \""+ Token + "\"}";
+                    JSONObject response = new JSONObject();
+                    response.put("Username", Username);
+                    response.put("Token", Token);
+                    return response.toString();
 
                 } else {
 
