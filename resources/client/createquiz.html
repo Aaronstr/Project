@@ -12,36 +12,72 @@
     <div id="pageHeader">
 
         <div id="loggedInDetails"><a href="/client/login.html">Login</a></div>
-
-    </div>
-    <div id = "listQuiz"></div>
-    <div id ="editKR">
-        <h2 id = "editHeading"></h2>
-        <form id = "krForm">
-            <div>
-                <lavel for ="QuizID" class ="label">QuizID:</lavel>
-                <input type ="text" name="QuizID" id ="QuizID">
-            </div>
-            <div>
-                <label for ="QuizName" class ="QuizName">QuizName:</label>
-                <input type="text" name ="QuizName" id="QuizName">
-            </div>
-            <div>
-                <label for="Username" class ="label">Username :</label>
-                <input type="text" name ="Username" id = "Username">
+        <!--   -->
             </div>
 
-            <div>
-                <input type="submit" value="Save" id="saveButton">
-                <input type="submit" value="Cancel" id="cancelButton">
-            </div>
-        </form>
-    </div>
+            <div id = "listQuiz"></div>
+            <div id ="editQuiz">
+                <p/> If you leave the QuizID blank it will create a new Quiz.<p>
+                <form id = "QuizForm">
+                    <div>
+                        <lavel for ="QuizID" class ="label">QuizID :</lavel>
+                        <input type ="text" name="QuizID" id ="QuizID">
+                    </div>
+                    <div>
+                        <label for ="QuizName" class ="QuizName">QuizName :</label>
+                        <input type="text" name ="QuizName" id="QuizName">
+                    </div>
+
+                          <div>
+                              <input type="submit" value="Save" id="saveButton">
+
+                          </div>
+                      </form>
+                  </div>
+    <form id = "QuestionForm">
+        <p/> Create a question for the quiz.<p>
+        <div>
+            <lavel for ="QuizID" class ="label">QuizID :</lavel>
+            <input type ="text" name="QuizID" id ="QuizQuestionID">
+        </div>
+        <div>
+            <label for ="QuizName" class ="QuizName">Timer :  </label>
+            <input type="text" name ="QuizName" id="Timer">
+        </div>
+        <div>
+            <label for ="QuizName" class ="QuizName">QuestionText : </label>
+            <input type="text" name ="QuizName" id="QuestionText">
+        </div>
+        <div>
+            <label for ="QuizName" class ="QuizName">QuestionType : (1 or 2)</label>
+            <input type="text" name ="QuizName" id="QuestionType">
+        </div>
+        <div>
+            <label for ="QuizName" class ="QuizName">CorrectAnswerText : </label>
+            <input type="text" name ="QuizName" id="CorrectAnswerText">
+        </div>
+        <div>
+            <label for ="QuizName" class ="QuizName">WrongAnswerText1 : (Only if question type 2)</label>
+            <input type="text" name ="QuizName" id="WrongAnswerText1">
+        </div>
+        <div>
+            <label for ="QuizName" class ="QuizName">WrongAnswerText2 : (Only if question type 2)</label>
+            <input type="text" name ="QuizName" id="WrongAnswerText2">
+        </div>
+        <div>
+            <label for ="QuizName" class ="QuizName">WrongAnswerText3 : (Only if question type 2)</label>
+            <input type="text" name ="QuizName" id="WrongAnswerText3">
+        </div>
+
+        <div>
+            <input type="submit" value="Save" id="saveQuestionButton">
+
+        </div>
+    </form>
 
 
+              </div>
 
-</div>
+              </body>
 
-</body>
-
-</html>
+              </html>

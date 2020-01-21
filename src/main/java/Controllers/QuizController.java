@@ -149,7 +149,7 @@ public class QuizController {
             ResultSet results = ps.executeQuery();
             if (results.next()) {
                 item.put("QuizID", QuizID);
-                item.put("Username", results.getInt(1));
+                item.put("Username", results.getString(1));
                 item.put("QuizName", results.getString(2));
             }
             return item.toString();
