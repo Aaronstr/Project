@@ -38,7 +38,15 @@ h1 {
     margin: 0;
     text-align: right;
     display: inline;
+    float: right;
+    padding-left:20px;
+}
+#toIndex {
+    margin: 0;
+    text-align: right;
+    display: inline;
     float: right
+
 }
  #searchButton, #createQuizButton, #createFlashcardButton {
      background-color: #af6a2f;

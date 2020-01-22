@@ -42,93 +42,99 @@ function  pageLoad() {
 
 function saveQuestionQuiz(event) {
     event.preventDefault();
-    if(document.getElementById("QuizQuestionID").value.trim() ==='') {
+    if (document.getElementById("QuizQuestionID").value.trim() === '') {
         alert("Please provide a QuizID")
         return;
     }
-    if(document.getElementById("Timer").value.trim() ==='') {
+    if (document.getElementById("Timer").value.trim() === '') {
         alert("Please provide a Timer")
         return;
     }
-    if(document.getElementById("QuestionText").value.trim() ==='') {
+    if (document.getElementById("QuestionText").value.trim() === '') {
         alert("Please provide a QuestionText")
         return;
     }
-    if(document.getElementById("QuestionType").value.trim() ==='') {
+    if (document.getElementById("QuestionType").value.trim() === '') {
         alert("Please provide a QuestionType")
         return;
     }
-    if(document.getElementById("CorrectAnswerText").value.trim() ==='') {
+    if (document.getElementById("CorrectAnswerText").value.trim() === '') {
         alert("Please provide a CorrectAnswerText")
         return;
     }
-    if(document.getElementById("WrongAnswerText1").value.trim() ==='') {
-        alert("Please provide a WrongAnswerText1")
-        return;
-    }
-    if(document.getElementById("WrongAnswerText2").value.trim() ==='') {
-        alert("Please provide a WrongAnswerText2")
-        return;
-    }
-    if(document.getElementById("WrongAnswerText3").value.trim() ==='') {
-        alert("Please provide a WrongAnswerText3")
-        return;
-    }
+
     // question data from table
+
+    // LAYER 1 - CREATE QUESTION //
+    const form = document.getElementById("QuestionForm");
+    const formData = new FormData(form);
     fetch("/Question/Create", {method: 'post', body: formData}
-        ).then(response => response.json()
-        ).then(responseData => {
-
-            if (responseData.hasOwnProperty('error')) {
-                alert(responseData.error);
-            } else {
-
-            }
-        });
-    let QuestionID = 0;
-    //quizID
-    fetch('/Question/Select/', {method: 'get'}
     ).then(response => response.json()
-    ).then(Questions => {
-        for (let Question of Questions) {
-            let newQuestionID=Question.QuestionID;
-            if (QuestionID<newQuestionID){
-                QuestionID=newQuestionID;
-            }
+    ).then(responseData => {
+
+        if (responseData.hasOwnProperty('error')) {
+            alert(responseData.error);
+        } else {
+            alert("Created Question")
+            // LAYER 2 - GET THE MOST RECENT QUESTION //
+
+            let QuestionID = document.getElementById("QuizQuestionID").value;
+            fetch('/Question/Select/'+QuestionID, {method: 'get'}
+            ).then(response => response.json()
+            ).then(Questions => {
+
+                let Question = "0";
+                for (let questions of Questions) {
+                     Question = questions.QuestionID;
+                }
+
+
+                // LAYER 3 - DO SOMETHING BASED ON QUESTION TYPE //
+
+                if (document.getElementById("QuestionType").value.trim() === '1') {
+                    // type one data from table
+                    const form = document.getElementById("QuestionForm");
+                    const formData = new FormData(form);
+                    formData.append("QuestionID", Question);
+
+                    fetch("/AnswerTypeOne/Create", {method: 'post', body: formData}
+                    ).then(response => response.json()
+                    ).then(responseData => {
+
+                        if (responseData.hasOwnProperty('error')) {
+                            alert(responseData.error);
+                        } else {
+                            alert("Created Type one answer")
+                            // LAYER 4a - ANSWER TYPE 1 MADE //
+
+                        }
+                    });
+                } else {
+                    // type two data from table
+                    const form = document.getElementById("QuestionForm");
+                    const formData = new FormData(form);
+                    formData.append("QuestionID", Question);
+                    fetch("/AnswerTypeTwo/Create", {method: 'post', body: formData}
+                    ).then(response => response.json()
+                    ).then(responseData => {
+
+                        if (responseData.hasOwnProperty('error')) {
+                            alert(responseData.error);
+                        } else {
+                            alert("Created Type two answer")
+                            // LAYER 4b - ANSWER TYPE 2 MADE //
+
+                        }
+                    });
+
+                }
+
+            });
+
         }
     });
 
-    if (document.getElementById("QuestionType").value.trim() ==='1') {
-        // type one data from table
-        fetch("/AnswerTypeOne/Create", {method: 'post', body: formData}
-        ).then(response => response.json()
-        ).then(responseData => {
-
-            if (responseData.hasOwnProperty('error')) {
-                alert(responseData.error);
-            } else {
-
-            }
-        });
-    }
-    else{
-        // type two data from table
-        fetch("/AnswerTypeTwo/Create", {method: 'post', body: formData}
-        ).then(response => response.json()
-        ).then(responseData => {
-
-            if (responseData.hasOwnProperty('error')) {
-                alert(responseData.error);
-            } else {
-
-            }
-        });
-
-    }
-
-
 }
-
 
 function editQuiz(event) {
     const  id = event.target.getAttribute("data-id");
@@ -155,6 +161,7 @@ function saveEditQuiz(event) {
     if (id === '') {
         const form = document.getElementById("QuizForm");
         const formData = new FormData(form);
+        formData.append("Username", Cookies.get("Username"));
         fetch("/Quiz/Create", {method: 'post', body: formData}
         ).then(response => response.json()
         ).then(responseData => {

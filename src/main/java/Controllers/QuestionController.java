@@ -1,8 +1,10 @@
 package Controllers;
+
 import Server.Main;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
@@ -98,7 +100,7 @@ public class QuestionController {
             }
             System.out.println("quiz/Select/" + QuizID);
 
-            PreparedStatement ps = Main.db.prepareStatement("SELECT QuestionID, Timer, QuestionText, QuestionType From QUESTION Where QuizID=? ");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT QuestionID, Timer, QuestionText, QuestionType From QUESTION Where QuizID=? ORDER BY QuestionID ASC");
             ps.setInt(1, QuizID);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
