@@ -142,3 +142,24 @@ form Kr{
 table{
     width:100px;
 }
+
+
+li {
+    display: block;
+    margin: 1em;
+
+}
+#previous {
+    width: 200px;
+    background-color: cornflowerblue;
+}
+#next {
+    width: 200px;
+    background-color: cornflowerblue;
+}
+#submit {
+    width: 200px;
+    background-color: cornflowerblue;
+}
+
+
