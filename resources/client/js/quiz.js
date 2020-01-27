@@ -1,8 +1,5 @@
 // document.getElementById("questionHeader").innerHTML = Question.QuestionText; // loads the question into the html
-var CorrectAnswerText
-var WrongAnswerText1
-var WrongAnswerText2
-var WrongAnswerText3
+var score=0;
 
 
 function pageLoad() {
@@ -12,14 +9,14 @@ function pageLoad() {
     let QuizID = queryString.slice(1);
 
     //QUIZNAME//
-    fetch("/Quiz/Select3/"+QuizID, {method: 'get'}//calls API get QuizName, I load it to make sure it is up to date.
+    fetch("/Quiz/Select3/" + QuizID, {method: 'get'}//calls API get QuizName, I load it to make sure it is up to date.
     ).then(response => response.json()
     ).then(responseData => {
 
         if (responseData.hasOwnProperty('error')) {
             alert(responseData.error);
         } else {
-            let QuizName=responseData.QuizName;
+            let QuizName = responseData.QuizName;
             document.getElementById("quizHeader").innerHTML = QuizName; //Creates a header with thw quizzes name
 
         }
@@ -28,75 +25,152 @@ function pageLoad() {
 
     //QUIZ//
 
-    let QuestionsHTML  = '<table>' +
-        '<tr>' +
-        '<th>QuestionID</th>' +
-        '<th>QuestionText</th>' +
-        '<th>Answer1</th>' +
-        '<th>Answer2</th>' +
-        '<th>Answer3</th>' +
-        '<th>Answer4</th>' +
-        '</tr>';
-    fetch("/Question/Select/" + QuizID, {method: 'get'}
+    fetch("/Question/Select/" + QuizID, {method: 'get'} //Load the question
     ).then(response => response.json()
     ).then(Questions => {
         for (let Question of Questions) {
-            let QuestionID=Question.QuestionID;
+            let QuestionID = Question.QuestionID;
 
-            let QuestionType=Question.QuestionType;
+            let QuestionType = Question.QuestionType;
 
-            if (QuestionType=2) {
-                fetch("/AnswerTypeTwo/Select/" + QuestionID, {method: 'get'}
+            if (QuestionType == 2) { //Finds out the question type
+                fetch("/AnswerTypeTwo/Select/" + QuestionID, {method: 'get'} //loads correct and wrong answer
                 ).then(response2 => response2.json()
                 ).then(Answer => {
+                    //creates table
+                    let QuestionsHTML = `<table id="table_${Question.QuestionID}">` +
+                        '<tr>' +
+                        '<th>QuestionID</th>' +
+                        '<th>QuestionType</th>' +
+                        '<th>QuestionText</th>' +
+                        '<th>Answer1</th>' +
+                        '<th>Answer2</th>' +
+                        '<th>Answer3</th>' +
+                        '<th>Answer4</th>' +
+                        '</tr>';
+                    //Places data into table
+                    QuestionsHTML += '<tr>' +
+                        `<td>${Question.QuestionID}</td>` +
+                        `<td>${Question.QuestionType}</td>` +
+                        `<td>${Question.QuestionText}</td>` +
+                        `<td>${Answer.CorrectAnswerText}</td>` +
+                        `<td>${Answer.WrongAnswerText1}</td>` +
+                        `<td>${Answer.WrongAnswerText2}</td>` +
+                        `<td>${Answer.WrongAnswerText3}</td>` +
+                        `<td class ='last'>` +
+                        '<div>' +
+                        `    <input type="text" name ="Answer" id="Answer${Question.QuestionID}">` +
+                        '</div>' +
+                        `<button type="submit" class ='test' data-id='${Question.QuestionID}' data-id2='${Question.QuestionType}'>Mark</button>` +
+                        `</td>` +
+                        `</tr>`;
+                    //Above it creates a form to enter the answer in and a button to submit it.
 
-               //     for (let i = Answer.length - 1; i > 0; i--) { // Shuffle the answers!
-                 //       let j = Math.floor(Math.random() * (i + 1));
-                //        let temp = Answer[i];
-                //        Answer[i] = Answer[j];
-                //        Answer[j] = temp;
-                //   }
+                    QuestionsHTML += '</table>';
 
-                     CorrectAnswerText=Answer.CorrectAnswerText;
-                     WrongAnswerText1=Answer.WrongAnswerText1;
-                     WrongAnswerText2=Answer.WrongAnswerText2;
-                     WrongAnswerText3=Answer.WrongAnswerText3;
+                    document.getElementById("Quiz").innerHTML += QuestionsHTML;
+
+                    let editButtons = document.getElementsByClassName("test"); //  This button takes you to the function checkQuestion
+                    for (let button of editButtons) {
+                        button.addEventListener("click", checkQuestion,);
+                    }
+
+
+                });
+                //It then checks if it is a question type one
+
+            }
+            //It then checks if it is a question type one
+
+            if (QuestionType == 1) { //Finds out the question type
+                fetch("/AnswerTypeOne/Select/" + QuestionID, {method: 'get'} //loads correct and wrong answer
+                ).then(response2 => response2.json()
+                ).then(Answer => {
+                    //creates table
+                    let QuestionsHTML = `<table id="table_${Question.QuestionID}" >` +
+                        '<tr>' +
+                        '<th>QuestionID</th>' +
+                        '<th>QuestionType</th>' +
+                        '<th>QuestionText</th>' +
+                        '</tr>';
+                    //Places data into table
+                    QuestionsHTML += '<tr>' +
+                        `<td>${Question.QuestionID}</td>` +
+                        `<td>${Question.QuestionType}</td>` +
+                        `<td>${Question.QuestionText}</td>` +
+                        `<td class ='last'>` +
+                        '<div>' +
+                        `    <input type="text" name ="Answer" id="Answer${Question.QuestionID}">` +
+                        '</div>' +
+                        `<button type="submit" class ='test' data-id='${Question.QuestionID}' data-id2='${Question.QuestionType}'>Mark</button>` +
+                        `</td>` +
+                        `</tr>`;
+                    //Above it creates a form to enter the answer in and a button to submit it.
+
+                    QuestionsHTML += '</table>';
+
+                    document.getElementById("Quiz").innerHTML += QuestionsHTML;
+
+                    let editButtons = document.getElementsByClassName("test"); //  This button takes you to the function checkQuestion
+                    for (let button of editButtons) {
+                        button.addEventListener("click", checkQuestion,);
+                    }
+
 
                 });
             }
-            //Answer.CorrectAnswerText
-            //Answer.WrongAnswerText1
+        }
 
 
-            QuestionsHTML += '<tr>' +
-                `<td>${Question.QuestionID}</td>` +
-                `<td>${Question.QuestionText}</td>` +
-                `<td>${CorrectAnswerText}</td>` +
-                `<td>${WrongAnswerText1}</td>` +
-                `<td>${WrongAnswerText2}</td>` +
-                `<td>${WrongAnswerText3}</td>` +
-                `<td class ='last'>` +
-                '<div>' +
-                '    <input type="text" name ="Answer" id="Answer">' +
-                '</div>'+
-                `<button type="submit" class ='test' data-id='${Question.QuestionID},${document.getElementById("Answer")}'>Mark</button>`+
-                `</td>` +
-                `</tr>`;
-//oForm.elements["name"].value       document.querySelector('Answer')   '<input type="text" id="myForm" name="Answer"  />'+
-        }
-        QuestionsHTML  += '</table>';
-        document.getElementById("Quiz").innerHTML = QuestionsHTML ;
-        let editButtons = document.getElementsByClassName("test"); //  This button takes you to the function edit quiz
-        for (let button of editButtons) {
-            button.addEventListener("click", editQuiz, );
-        }
     });
 
-    document.getElementById("submit").addEventListener("click", editQuiz);
+    document.getElementById("submit").addEventListener("click", finish); // takes you to submit
+
 }
 
 
-function editQuiz(){
-    let x = event.target.getAttribute("data-id");
-alert(x)
+function checkQuestion(event){ //This will check if the question is correct
+
+    let id = event.target.getAttribute("data-id"); //Gets the questionID
+    let answer = document.getElementById("Answer" + id).value; //Get the data in the form
+    let QuestionType = event.target.getAttribute("data-id2"); //Get the QuestionType
+
+    if (QuestionType==2){ //Checks the QuestionType
+        fetch("/AnswerTypeTwo/Select/" + id, {method: 'get'} //Loads answer
+        ).then(response2 => response2.json()
+        ).then(Answer => {
+            CorrectAnswerText=Answer.CorrectAnswerText
+            if(answer==CorrectAnswerText){//compares answers
+                alert("correct");
+                score=score+1;
+                document.getElementById("table_" + id).style.display = "none";
+            }
+            else{
+                alert("Incorrect, the correct answer is "+CorrectAnswerText)
+                document.getElementById("table_" + id).style.display = "none";
+            }
+        });
+    }
+    if (QuestionType==1){ //Checks the QuestionType
+        fetch("/AnswerTypeOne/Select/" + id, {method: 'get'} //Loads answer
+        ).then(response2 => response2.json()
+        ).then(Answer => {
+            CorrectAnswerText=Answer.CorrectAnswerText
+            if(answer==CorrectAnswerText){//compares answers
+                alert("correct");
+                 score=score+1
+                document.getElementById("table_" + id).style.display = "none";
+            }
+            else{
+                alert("Incorrect, the correct answer is "+CorrectAnswerText)
+                document.getElementById("table_" + id).style.display = "none";
+
+            }
+        });
+    }
+
+}
+function finish() {
+alert("Score : " + score)
+    window.location.href = '/client/search.html';
 }
